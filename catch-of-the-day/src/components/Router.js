@@ -9,6 +9,7 @@ const Router = () => (
     <BrowserRouter>
         <Switch>
             <Route exact path="/" component={StorePicker}/>
+            <Route exact path="/store/:storeId" component={App}/>
             <Route exact component={NotFound}/>
 
         </Switch>
