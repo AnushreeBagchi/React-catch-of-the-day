@@ -1,21 +1,66 @@
-import React from 'react';
-import {render} from 'react-dom';
-import Header from './Header.js';
-import Inventory from './Inventory.js';
-import Order from './Order.js';
-
+import React from "react";
+import { render } from "react-dom";
+import Header from "./Header.js";
+import Inventory from "./Inventory.js";
+import Order from "./Order.js";
+import sampleFishes from "../../src/sample-fishes.js";
+import Fish from "./Fish";
 
 class App extends React.Component {
-    render(){
-        return (
-            <div className="catch-of-the-day">
-                <div className="menu">
-                    <Header tagline="Fresh Sea Food Market"/>
-                </div>
-                <Order/>
-                <Inventory/>
-            </div>
-        )
-        }
+  state = {
+    fishes: {},
+    order: {},
+  };
+  addFish = (fish) => {
+    // Take a copy of the existing state
+    const fishes = { ...this.state.fishes };
+    // Add our new fish to our fishes
+    fishes[`fish${Date.now()}`] = fish;
+    //3. set the newfish object to state
+    this.setState({
+      fishes: fishes,
+    });
+
+    console.log(this.state.fishes);
+  };
+  loadSampleFishes = () => {
+    this.setState({
+      fishes: sampleFishes,
+    });
+  };
+  addToOrder = key => {
+      //1.take copy of the state
+      const order = {...this.state.order};
+      //2. Either add or update the number in our order
+      order[key] = order[key]+1 || 1;
+      this.setState({
+          order: order
+      });
+
+  };
+  render() {
+    return (
+      <div className="catch-of-the-day">
+        <div className="menu">
+          <Header tagline="Fresh Sea Food Market" />
+          <ul className="fishes">
+            {Object.keys(this.state.fishes).map((fish) => (
+              <Fish
+                key={fish}
+                index={fish}
+                details={this.state.fishes[fish]}
+                addToOrder={this.addToOrder}
+              ></Fish>
+            ))}
+          </ul>
+        </div>
+        <Order />
+        <Inventory
+          loadSampleFishes={this.loadSampleFishes}
+          addFish={this.addFish}
+        />
+      </div>
+    );
+  }
 }
 export default App;

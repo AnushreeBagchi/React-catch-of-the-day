@@ -1,5 +1,5 @@
 import React from 'react';
-import {getFunName} from "../helpers.js"
+import {getFunName} from "../helpers.js";
 
 class StorePicker extends React.Component {
     // We cannot access this inside any of the functions we create. So we need to bind this inside constructor
