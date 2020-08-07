@@ -1,5 +1,4 @@
 import React from "react";
-import { render } from "react-dom";
 import Header from "./Header.js";
 import Inventory from "./Inventory.js";
 import Order from "./Order.js";
@@ -14,22 +13,27 @@ class App extends React.Component {
   };
   componentDidMount() {
     //reinstate our locale storage
-    const localStorageRef = localStorage.getItem(this.props.match.params.storeId);
-    this.setState({"order": JSON.parse(localStorageRef)});
+    const localStorageRef = localStorage.getItem(
+      this.props.match.params.storeId
+    );
+    this.setState({ order: JSON.parse(localStorageRef) });
 
     this.ref = base.syncState(`${this.props.match.params.storeId}/fishes`, {
-      context : this,
-      state : 'fishes'
+      context: this,
+      state: "fishes",
     });
-  };
+  }
 
-  componentDidUpdate(){
-    localStorage.setItem(this.props.match.params.storeId, JSON.stringify(this.state.order));
-  };
+  componentDidUpdate() {
+    localStorage.setItem(
+      this.props.match.params.storeId,
+      JSON.stringify(this.state.order)
+    );
+  }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     base.removeBinding(this.ref);
-  };
+  }
 
   addFish = (fish) => {
     // Take a copy of the existing state
@@ -48,22 +52,30 @@ class App extends React.Component {
       fishes: sampleFishes,
     });
   };
-  addToOrder = key => {
-      //1.take copy of the state
-      const order = {...this.state.order};
-      //2. Either add or update the number in our order
-      order[key] = order[key]+1 || 1;
-      this.setState({
-          order: order
-      });
-
+  addToOrder = (key) => {
+    //1.take copy of the state
+    const order = { ...this.state.order };
+    //2. Either add or update the number in our order
+    order[key] = order[key] + 1 || 1;
+    this.setState({
+      order: order,
+    });
   };
   updateFish = (key, updatedFish) => {
-    const fishes = {...this.state.fishes};
+    const fishes = { ...this.state.fishes };
     fishes[key] = updatedFish;
-    this.setState({fishes});
-
-  }
+    this.setState({ fishes });
+  };
+  removeFish = (key) => {
+    const fishes = { ...this.state.fishes };
+    fishes[key] = null;
+    this.setState({ fishes });
+  };
+  removeOrder = (key) => {
+    const order = { ...this.state.order };
+    delete order[key]; //usig delete because not using from firebase.
+    this.setState({ order });
+  };
   render() {
     return (
       <div className="catch-of-the-day">
@@ -80,12 +92,17 @@ class App extends React.Component {
             ))}
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order}/>
+        <Order
+          fishes={this.state.fishes}
+          order={this.state.order}
+          removeOrder={this.removeOrder}
+        />
         <Inventory
           loadSampleFishes={this.loadSampleFishes}
           addFish={this.addFish}
           fishes={this.state.fishes}
           updateFish={this.updateFish}
+          removeFish={this.removeFish}
         />
       </div>
     );
