@@ -5,11 +5,14 @@ import Order from "./Order.js";
 import sampleFishes from "../../src/sample-fishes.js";
 import Fish from "./Fish";
 import base from "../base.js";
-
+import PropTypes from "prop-types";
 class App extends React.Component {
   state = {
     fishes: {},
     order: {},
+  };
+  static propTypes = {
+    match: PropTypes.object,
   };
   componentDidMount() {
     //reinstate our locale storage
