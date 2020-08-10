@@ -7,4 +7,5 @@ Learning React from [ReactForBeginners.com](https://ReactForBeginners.com) by We
 - Load sample fishes or added any fish of your choice to the inventory.
 - You can add multiple fishes to the order for checkout.
 - You can also manage the inventory.
+- You can go back and login to some other store and come back again. Data for multiple stores are preserved in Firebase.
 
