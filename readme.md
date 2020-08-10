@@ -2,5 +2,9 @@ Catch of the Day — a real-time app for a trendy seafood market where price and
 
 Learning React from [ReactForBeginners.com](https://ReactForBeginners.com) by Wes Bos.
 
-Check this out @ https://catch-of-the-day-anushreebagchi.netlify.app/
+- Check this out @ https://catch-of-the-day-anushreebagchi.netlify.app/
+- Visit a store. Login using Github or Facebook.
+- Load sample fishes or added any fish of your choice to the inventory.
+- You can add multiple fishes to the order for checkout.
+- You can also manage the inventory.
 
