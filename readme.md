@@ -9,3 +9,6 @@ Learning React from [ReactForBeginners.com](https://ReactForBeginners.com) by We
 - You can also manage the inventory.
 - You can go back and login to some other store and come back again. Data for multiple stores are preserved in Firebase.
 
+
+![alt text](https://media.giphy.com/media/mG1OTIhljvPwshavk9/giphy.gif "Image of the project")
+
